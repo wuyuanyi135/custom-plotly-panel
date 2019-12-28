@@ -1,0 +1,26 @@
+{
+  "name": "custom-plotly-panel",
+  "version": "1.0.0",
+  "description": "Custom Plotly Panel",
+  "scripts": {
+    "build": "grafana-toolkit plugin:build",
+    "test": "grafana-toolkit plugin:test",
+    "dev": "grafana-toolkit plugin:dev",
+    "watch": "grafana-toolkit plugin:dev --watch"
+  },
+  "author": "Yuanyi Wu",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@grafana/data": "next",
+    "@grafana/toolkit": "^6.6.0-pre-45b7de1910",
+    "@grafana/ui": "next",
+    "@types/react-plotly.js": "^2.2.4"
+  },
+  "dependencies": {
+    "@types/memoize-one": "^5.1.2",
+    "memoize-one": "^5.1.1",
+    "memorize-one": "^0.0.0",
+    "plotly.js": "^1.51.3",
+    "react-plotly.js": "^2.4.0"
+  }
+}

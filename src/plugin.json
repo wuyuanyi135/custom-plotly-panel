@@ -1,0 +1,25 @@
+{
+  "type": "panel",
+  "name": "Custom Plotly Panel",
+  "id": "grafana-custom-plotly-panel",
+
+  "info": {
+    "description": "Custom Plotly Panel",
+    "author": {
+      "name": "Yuanyi Wu"
+    },
+    "keywords": ["Plotly", "panel"],
+    "logos": {
+      "small": "img/logo.png",
+      "large": "img/logo.png"
+    },
+    "screenshots": [],
+    "version": "%VERSION%",
+    "updated": "%TODAY%"
+  },
+
+  "dependencies": {
+    "grafanaVersion": "6.3.x",
+    "plugins": []
+  }
+}
