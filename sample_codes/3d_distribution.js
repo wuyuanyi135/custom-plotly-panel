@@ -14,6 +14,7 @@
     }
     return {
         layout: {
+            xaxis: {type: "log"},
             scene: {
                 xaxis: {title: {text: 'Time'}, ticksuffix: " s", showticksuffix: 'all', tickformat: '.1f'},
                 yaxis: {title: {text: 'Size (um)'}},
@@ -24,7 +25,12 @@
             x,
             y,
             z,
-            type: 'surface'
+            type: 'surface',
+            transforms: [{
+                type: 'sort',
+                target: 'x',
+                order: 'ascending'
+            }]
         }]
     }
 };

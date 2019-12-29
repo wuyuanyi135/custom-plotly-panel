@@ -8,15 +8,14 @@
     }
     return {
         layout: {
-            xaxis: {title: {text: "Size (um)"}},
+            xaxis: {title: {text: "Size (um)"}, type: "log"},
             yaxis: {title: {text: "Count"}}
         },
         data: [{
             x,
             y,
             type: 'scatter',
-            mode: 'lines+markers',
-            line: {shape: 'spline'},
+            mode: 'lines',
             transforms: [{
                 type: 'sort',
                 target: 'x',
