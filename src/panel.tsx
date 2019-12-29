@@ -31,6 +31,7 @@ export class Panel extends PureComponent<Props> {
         const layout = {
             width,
             height,
+            uirevision:'true',
             paper_bgcolor: "#161719",
             plot_bgcolor: "#161719",
             font: {
