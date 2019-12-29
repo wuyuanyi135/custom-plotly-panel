@@ -3,6 +3,7 @@ import {PanelProps} from '@grafana/data';
 import {Options} from 'types';
 import Plot from 'react-plotly.js';
 import memorizeOne from 'memoize-one';
+import moment from "moment";
 
 interface Props extends PanelProps<Options> {
 
@@ -10,8 +11,10 @@ interface Props extends PanelProps<Options> {
 
 export class Panel extends PureComponent<Props> {
     parseFunction = memorizeOne((code: string) => {
-      return eval(code);
+        return eval(code).bind(this);
     });
+
+    moment = moment;
 
     render() {
         const {data, width, height, options} = this.props;
@@ -31,7 +34,7 @@ export class Panel extends PureComponent<Props> {
         const layout = {
             width,
             height,
-            uirevision:'true',
+            uirevision: 'true',
             paper_bgcolor: "#161719",
             plot_bgcolor: "#161719",
             font: {
