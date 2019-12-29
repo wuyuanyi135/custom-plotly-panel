@@ -14,42 +14,55 @@ export class Panel extends PureComponent<Props> {
         return eval(code).bind(this);
     });
 
+    makeErrorDisplayElement = (text: string) => {
+        return (
+            <div style={{height: "100%", width: "100%", display: "table"}}>
+                <div style={{display: "table-cell", textAlign: "center", verticalAlign: "middle"}}>{text}</div>
+            </div>
+        );
+    };
+
     moment = moment;
 
     render() {
         const {data, width, height, options} = this.props;
 
-        let ret;
-        let err = false;
-        try {
-            const func = this.parseFunction(options.code);
-            ret = func(data);
-        } catch (e) {
-            console.error(e);
-            ret = null;
-            err = true;
+
+        let displayElement;
+
+        if (!data.series.length) {
+            displayElement = this.makeErrorDisplayElement("No data");
+        } else {
+            let ret;
+            try {
+                const func = this.parseFunction(options.code);
+                ret = func(data);
+                const extraLayout = ret && ret.layout ? ret.layout : {};
+                const layout = {
+                    width,
+                    height,
+                    uirevision: 'true',
+                    paper_bgcolor: "#161719",
+                    plot_bgcolor: "#161719",
+                    font: {
+                        color: "white",
+                    },
+                    margin: {
+                        b: 40,
+                        l: 40,
+                        r: 40,
+                        t: 20,
+                    },
+                    ...extraLayout,
+                };
+                const plotData = ret && ret.data ? ret.data : [];
+                displayElement = <Plot data={plotData} layout={layout}/>;
+            } catch (e) {
+                console.error(e);
+                ret = null;
+                displayElement = this.makeErrorDisplayElement(`Error: ${e.message}`);
+            }
         }
-
-        const extraLayout = ret && ret.layout ? ret.layout : {};
-        const layout = {
-            width,
-            height,
-            uirevision: 'true',
-            paper_bgcolor: "#161719",
-            plot_bgcolor: "#161719",
-            font: {
-                color: "white",
-            },
-            margin: {
-                b: 40,
-                l: 40,
-                r: 40,
-                t: 20,
-            },
-            ...extraLayout,
-        };
-
-        const plotData = ret && ret.data ? ret.data : [];
 
         return (
             <div
@@ -59,7 +72,7 @@ export class Panel extends PureComponent<Props> {
                     height,
                 }}
             >
-                {err ? "Error occured" : <Plot data={plotData} layout={layout}/>}
+                {displayElement}
 
             </div>
         );
